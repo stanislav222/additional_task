@@ -30,6 +30,9 @@ public class KafkaStreamsConfig {
     @Value(value = "${spring.kafka.bootstrap-servers}")
     private String bootstrapAddress;
 
+    @Value("#{'${listOfBannedWords}'.split(',')}")
+    private List<String> listOfBannedWords;
+
     @Bean(name = KafkaStreamsDefaultConfiguration.DEFAULT_STREAMS_CONFIG_BEAN_NAME)
     public KafkaStreamsConfiguration kStreamsConfigs() {
         Map<String, Object> props = new HashMap<>();
@@ -51,7 +54,6 @@ public class KafkaStreamsConfig {
 
     public String replacingWordsInTheList(String message) {
         String newString = null;
-        List<String> listOfBannedWords = List.of("негр", "лох");
         for (String bannedWord : listOfBannedWords){
             if (FilterMessage.containsIgnoreCase(message, bannedWord)){
                  newString = FilterMessage.replaceIgnoreCase(message, bannedWord, "***");

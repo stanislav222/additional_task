@@ -1,3 +1,28 @@
 spring:
   kafka:
     bootstrap-servers: localhost:29092
+    consumer:
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+### Custom props ###
+
+enable:
+  kafkaListener: true
+
+###
+
+producerKafka:
+  message:
+    limit: 1000
+
+###
+
+listOfBannedWords:
+  hate,
+  hitler,
+  slave,
+  shooting,
+  stupid,
+  boobs,
+  ...Hitler
